@@ -91,6 +91,15 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	}
 
 	@Override
+	public Usuario delete(Long id) throws Exception {
+		if (!usuarioRepository.existsById(id)) {
+			throw new Exception("Usuário não encontrado com ID: " + id);
+		}
+		usuarioRepository.deleteById(id);
+		return null;
+	}
+
+	@Override
 	public Papel savePapel(Papel papel) {
 		return papelRepository.save(papel);
 	}

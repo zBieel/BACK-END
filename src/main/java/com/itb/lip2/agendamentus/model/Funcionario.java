@@ -16,8 +16,6 @@ public class Funcionario extends Usuario {
     private Empresa empresa;
 
     public Funcionario() {
-
-
     }
 
     public Funcionario(Long id, String nome, String email, String senha, String tipoUsuario) {

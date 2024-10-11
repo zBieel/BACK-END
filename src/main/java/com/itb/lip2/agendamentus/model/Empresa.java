@@ -17,20 +17,6 @@ public class Empresa {
 
     private String nome;
 
-    private String logradouro;
-
-    private String cidade;
-
-    private int cep;
-
-    private int telefone;
-
-    private String uf;
-
-    private int cnpj;
-
-    private boolean codStatusEmpresa;
-
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -40,7 +26,6 @@ public class Empresa {
     private List<Agendamento> agendamentos = new ArrayList<Agendamento>();
 
     public Empresa() {
-
     }
 
     public Long getId() {
@@ -57,80 +42,6 @@ public class Empresa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public int getCep() {
-        return cep;
-    }
-
-    public void setCep(int cep) {
-        this.cep = cep;
-    }
-
-    public int getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public int getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(int cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public boolean isCodStatusEmpresa() {
-        return codStatusEmpresa;
-    }
-
-    public void setCodStatusEmpresa(boolean codStatusEmpresa) {
-        this.codStatusEmpresa = codStatusEmpresa;
-    }
-
-
-
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-
-    public List<Agendamento> getAgendamentos() {
-        return agendamentos;
-    }
-
-    public void setAgendamentos(List<Agendamento> agendamentos) {
-        this.agendamentos = agendamentos;
     }
 
     @Override
