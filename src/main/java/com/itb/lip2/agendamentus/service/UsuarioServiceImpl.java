@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
 import com.itb.lip2.agendamentus.model.Cliente;
 import com.itb.lip2.agendamentus.model.Funcionario;
 import com.itb.lip2.agendamentus.model.Papel;
@@ -15,13 +14,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.itb.lip2.agendamentus.model.Usuario;
 import com.itb.lip2.agendamentus.repository.UsuarioRepository;
-
 import javax.transaction.Transactional;
 
 @Service
@@ -38,7 +34,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
 	@Autowired
 	private PapelRepository papelRepository;
-
 
 	@Override
 	public Usuario save(Usuario usuario) {
@@ -57,7 +52,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 		return usuarioRepository.save(funcionario);
 	}
 
-
 	@Override
 	public Usuario saveCliente(Cliente cliente) {
 		cliente.setCodStatusUsuario(true);
@@ -66,7 +60,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 		addPapelToUsuario(cliente, "ROLE_CLIENTE");
 		return usuarioRepository.save(cliente);
 	}
-
 
 	@Override
 	public List<Usuario> findAll() {
@@ -85,7 +78,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	public Usuario update(Long id, Usuario usuario) throws Exception {
 		return usuarioRepository.findById(id).map(user ->{
 			user.setNome(usuario.getNome());
-			user.setDataNascimento(usuario.getDataNascimento());
 			return usuarioRepository.save(user);
 		}).orElseThrow(()-> new Exception("Usuário não encontrado!"));
 	}

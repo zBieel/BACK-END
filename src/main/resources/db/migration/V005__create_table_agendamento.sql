@@ -8,9 +8,7 @@ BEGIN
             horario_agendamento TIME,
             descricao_agendamento VARCHAR(45),
             usuario_id BIGINT,
-            empresa_id BIGINT,
-            CONSTRAINT fk_agendamento_cliente_id FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-            CONSTRAINT fk_agendamento_empresa_id FOREIGN KEY (empresa_id) REFERENCES empresas(id)
+            CONSTRAINT fk_agendamento_cliente_id FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
         );
     END IF;
 END $$;

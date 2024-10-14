@@ -4,12 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
 import javax.persistence.*;
-
 
 @Entity
 @Table(name = "usuarios")
@@ -30,20 +27,11 @@ public abstract class Usuario {
 	protected String email;
 	protected String senha;
 	protected boolean codStatusUsuario;
-	protected LocalDate dataNascimento;
-	protected String logradouro;
-	protected String bairro;
-	protected String cidade;
-	protected String uf;
-	protected String cep;
 	protected String telefone;
+	protected String mensagem;
 	@JsonIgnore
 	@Column(insertable = false, updatable = false)
 	protected String tipoUsuario;
-
-
-	// FetchType.EAGER  -> Traz todos os registros relacionados
-	// FetchType.LAZY   -> Não traz os registros relacionados
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)   // M: N
 	@JoinTable(
@@ -56,14 +44,16 @@ public abstract class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome,String email, String senha, String tipoUsuario) {
+	public Usuario(Long id, String nome, String email, String telefone, String mensagem, String tipoUsuario, Collection<Papel> papeis) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.senha = senha;
+		this.telefone = telefone;
+		this.mensagem = mensagem;
 		this.tipoUsuario = tipoUsuario;
+		this.papeis = papeis;
 	}
-	public Usuario(Long id, String nome,String email, String senha, String tipoUsuario, Collection<Papel> papeis) {
+	public Usuario(Long id, String nome, String email, String senha, String tipoUsuario, Collection<Papel> papeis) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -102,33 +92,29 @@ public abstract class Usuario {
 	public void setCodStatusUsuario(boolean codStatusUsuario) {
 		this.codStatusUsuario = codStatusUsuario;
 	}
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
 	public Collection<Papel> getPapeis() {
 		return papeis;
 	}
 	public void setPapeis(Collection<Papel> papeis) {
 		this.papeis = papeis;
 	}
-
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
-
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
 	public String getTelefone() {
 		return telefone;
 	}
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 	@Override

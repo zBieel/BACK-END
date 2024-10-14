@@ -22,10 +22,6 @@ public class Agendamento {
     @JoinColumn(name="usuario_id")
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name="empresa_id")
-    private Empresa empresa;
-
     public Agendamento() {
 
     }
@@ -62,14 +58,6 @@ public class Agendamento {
 
     public void setHorarioAgendamento(LocalTime horarioAgendamento) {
         this.horarioAgendamento = horarioAgendamento;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
     }
 
     public Cliente getCliente() {

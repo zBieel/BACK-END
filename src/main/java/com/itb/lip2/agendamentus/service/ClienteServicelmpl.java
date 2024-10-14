@@ -19,6 +19,8 @@ public class ClienteServicelmpl implements ClienteService{
         return clienteRepository.findById(id).map(cli ->{
             cli.setNome(cliente.getNome());
             cli.setEmail(cliente.getEmail());
+            cli.setTelefone(cliente.getTelefone());
+            cli.setMensagem(cliente.getMensagem());
             return clienteRepository.save(cli);
         }).orElseThrow(()->new Exception("Cliente não encontrado!"));
     }
