@@ -1,6 +1,7 @@
 package com.itb.lip2.agendamentus.service;
 
 import com.itb.lip2.agendamentus.model.Funcionario;
+import com.itb.lip2.agendamentus.model.Usuario;
 import com.itb.lip2.agendamentus.repository.FuncionarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,14 @@ public class FuncionarioServicelmpl implements FuncionarioService{
             fu.setEmail(funcionario.getEmail());
             return funcionarioRepository.save(fu);
         }).orElseThrow(()->new Exception("Funcionário não encontrado!"));
+    }
+
+    @Override
+    public Funcionario delete(Long id) throws Exception {
+        if (!funcionarioRepository.existsById(id)) {
+            throw new Exception("Usuário não encontrado com ID: " + id);
+        }
+        funcionarioRepository.deleteById(id);
+        return null;
     }
 }
