@@ -6,11 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteServicelmpl implements ClienteService{
-
     private final ClienteRepository clienteRepository;
 
     ClienteServicelmpl(ClienteRepository clienteRepository) {
-
         this.clienteRepository = clienteRepository;
     }
 
@@ -23,5 +21,14 @@ public class ClienteServicelmpl implements ClienteService{
             cli.setMensagem(cliente.getMensagem());
             return clienteRepository.save(cli);
         }).orElseThrow(()->new Exception("Cliente não encontrado!"));
+    }
+
+    @Override
+    public Cliente delete(Long id) throws Exception {
+        if (!clienteRepository.existsById(id)) {
+            throw new Exception("Cliente não encontrado com ID: " + id);
+        }
+        clienteRepository.deleteById(id);
+        return null;
     }
 }
