@@ -21,7 +21,7 @@ import javax.persistence.*;
 public abstract class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-Incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	protected String nome;
 	protected String email;
@@ -33,7 +33,7 @@ public abstract class Usuario {
 	@Column(insertable = false, updatable = false)
 	protected String tipoUsuario;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)   // M: N
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			name="usuarios_papeis",
 			joinColumns = @JoinColumn(name="usuario_id", referencedColumnName = "id"),
@@ -44,20 +44,10 @@ public abstract class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String email, String telefone, String mensagem, String tipoUsuario, Collection<Papel> papeis) {
+	public Usuario(Long id, String nome, String email, String tipoUsuario, Collection<Papel> papeis) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.telefone = telefone;
-		this.mensagem = mensagem;
-		this.tipoUsuario = tipoUsuario;
-		this.papeis = papeis;
-	}
-	public Usuario(Long id, String nome, String email, String senha, String tipoUsuario, Collection<Papel> papeis) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
 		this.tipoUsuario = tipoUsuario;
 		this.papeis = papeis;
 	}

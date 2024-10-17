@@ -11,8 +11,16 @@ public class Funcionario extends Usuario {
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String email, String senha, String tipoUsuario, Collection<Papel> papeis) {
-        super(id, nome, email, senha, tipoUsuario, papeis);  // Acesso ao construtor da classe pai
+    public Funcionario(Long id, String nome, String email, String senha,String tipoUsuario, Collection<Papel> papeis) {
+        super(id, nome, email, tipoUsuario, papeis);
+        this.senha = senha;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }
