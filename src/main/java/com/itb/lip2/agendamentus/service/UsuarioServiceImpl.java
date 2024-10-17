@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.itb.lip2.agendamentus.model.Cliente;
 import com.itb.lip2.agendamentus.model.Funcionario;
 import com.itb.lip2.agendamentus.model.Papel;
+import com.itb.lip2.agendamentus.repository.ClienteRepository;
 import com.itb.lip2.agendamentus.repository.FuncionarioRepository;
 import com.itb.lip2.agendamentus.repository.PapelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -55,7 +59,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	@Override
 	public Usuario saveCliente(Cliente cliente) {
 		cliente.setCodStatusUsuario(true);
-		cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
 		cliente.setPapeis(new ArrayList<>());
 		addPapelToUsuario(cliente, "ROLE_CLIENTE");
 		return usuarioRepository.save(cliente);
@@ -65,6 +68,16 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	public List<Usuario> findAll() {
 
 		return usuarioRepository.findAll();
+	}
+
+	@Override
+	public List<Funcionario> findAllFuncionarios() {
+		return funcionarioRepository.findAll();
+	}
+
+	@Override
+	public List<Cliente> findAllClientes() {
+		return clienteRepository.findAll();
 	}
 
 	@Override
@@ -83,11 +96,12 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	}
 
 	@Override
-	public Usuario delete(Long id) throws Exception {
-		if (!usuarioRepository.existsById(id)) {
-			throw new Exception("Usuário não encontrado com ID: " + id);
+	public Usuario delete(Long id) {
+		Optional<Usuario> usuario = usuarioRepository.findById(id);
+		if(usuario.isPresent()){
+			usuarioRepository.delete(usuario.get());
+			return usuario.get();
 		}
-		usuarioRepository.deleteById(id);
 		return null;
 	}
 

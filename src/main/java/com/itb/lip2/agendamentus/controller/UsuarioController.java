@@ -2,7 +2,6 @@ package com.itb.lip2.agendamentus.controller;
 
 import java.net.URI;
 import java.util.List;
-
 import com.itb.lip2.agendamentus.model.Cliente;
 import com.itb.lip2.agendamentus.model.Funcionario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.itb.lip2.agendamentus.model.Usuario;
 import com.itb.lip2.agendamentus.service.UsuarioService;
 
@@ -26,6 +24,18 @@ public class UsuarioController {
 
 		return ResponseEntity.ok().body(usuarioService.findAll());
 	}
+
+	@GetMapping("/users/funcionario")
+		public ResponseEntity<List<Funcionario>> getFuncionarios() {
+
+			return ResponseEntity.ok().body(usuarioService.findAllFuncionarios());
+		}
+
+	@GetMapping("/users/cliente")
+		public ResponseEntity<List<Cliente>> getClientes() {
+
+			return ResponseEntity.ok().body(usuarioService.findAllClientes());
+		}
 
 	@PostMapping("/users")
 	public ResponseEntity<Usuario> saveUser(@RequestBody Usuario usuario) {
@@ -53,7 +63,6 @@ public class UsuarioController {
 
 	@GetMapping("/users/{id}")
 	public ResponseEntity<Object> findUserById(@PathVariable(value = "id") Long id) {
-		//return ResponseEntity.ok().body(usuarioService.findById(id).get());
 		try{
 			return ResponseEntity.ok().body(usuarioService.findById(id).get());
 		}catch (Exception e){
