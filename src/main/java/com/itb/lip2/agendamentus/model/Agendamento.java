@@ -1,7 +1,6 @@
 package com.itb.lip2.agendamentus.model;
 
-
-import javax.persistence.*;
+    import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -17,16 +16,12 @@ public class Agendamento {
     private LocalTime horarioAgendamento;
     private String descricaoAgendamento;
 
-
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="usuario_id")
     private Cliente cliente;
 
     public Agendamento() {
-
     }
-
-
 
     public Long getId() {
         return id;
@@ -67,7 +62,6 @@ public class Agendamento {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -1,17 +1,14 @@
 package com.itb.lip2.agendamentus.service;
 
 import com.itb.lip2.agendamentus.model.Funcionario;
-import com.itb.lip2.agendamentus.model.Usuario;
 import com.itb.lip2.agendamentus.repository.FuncionarioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FuncionarioServicelmpl implements FuncionarioService{
-
     private final FuncionarioRepository funcionarioRepository;
 
     FuncionarioServicelmpl(FuncionarioRepository funcionarioRepository) {
-
         this.funcionarioRepository = funcionarioRepository;
     }
 

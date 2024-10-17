@@ -4,7 +4,6 @@ import com.itb.lip2.agendamentus.model.Agendamento;
 import com.itb.lip2.agendamentus.repository.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
