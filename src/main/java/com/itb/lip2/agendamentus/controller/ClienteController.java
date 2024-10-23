@@ -29,15 +29,6 @@ public class ClienteController {
         }
     }
 
-    @PostMapping("/agendamento")
-    public ResponseEntity<Object> saveAgendamento(@RequestBody Agendamento agendamento) {
-        try {
-            return ResponseEntity.ok().body(agendamentoService.saveAgendamento(agendamento));
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
-
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "id") Long id) {
         try{

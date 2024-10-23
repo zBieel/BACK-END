@@ -5,7 +5,7 @@ BEGIN
         CREATE TABLE usuarios (
             id BIGSERIAL PRIMARY KEY,
             nome VARCHAR(45),
-            email VARCHAR(45) NOT NULL UNIQUE,
+            email VARCHAR(45) NOT NULL,
             senha VARCHAR(200),
             cod_status_usuario BOOLEAN NOT NULL,
             tipo_usuario VARCHAR(45) NOT NULL,

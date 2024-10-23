@@ -1,7 +1,8 @@
 package com.itb.lip2.agendamentus.model;
 
-    import javax.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -13,12 +14,14 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dataAgendamento;
+    private String nome;
+    private String telefone;
+    private String email;
     private LocalTime horarioAgendamento;
-    private String descricaoAgendamento;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="usuario_id")
-    private Cliente cliente;
+    private Funcionario funcionario;
 
     public Agendamento() {
     }
@@ -31,20 +34,36 @@ public class Agendamento {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public LocalDate getDataAgendamento() {
         return dataAgendamento;
     }
 
     public void setDataAgendamento(LocalDate dataAgendamento) {
         this.dataAgendamento = dataAgendamento;
-    }
-
-    public String getDescricaoAgendamento() {
-        return descricaoAgendamento;
-    }
-
-    public void setDescricaoAgendamento(String descricaoAgendamento) {
-        this.descricaoAgendamento = descricaoAgendamento;
     }
 
     public LocalTime getHorarioAgendamento() {
@@ -55,12 +74,12 @@ public class Agendamento {
         this.horarioAgendamento = horarioAgendamento;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     @Override

@@ -13,10 +13,20 @@ import org.springframework.web.bind.annotation.*;
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
+
     private final AgendamentoService agendamentoService;
-    public FuncionarioController(FuncionarioService funcionarioService, AgendamentoService agendamentoService) {
+    FuncionarioController(FuncionarioService funcionarioService, AgendamentoService agendamentoService) {
         this.funcionarioService = funcionarioService;
         this.agendamentoService = agendamentoService;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateFuncionario(@RequestBody Funcionario funcionario, @PathVariable(value="id") Long id) {
+        try {
+            return ResponseEntity.ok().body(funcionarioService.update(id, funcionario));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/agendamentos")
@@ -25,10 +35,10 @@ public class FuncionarioController {
         return ResponseEntity.ok().body(agendamentos);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateFuncionario(@RequestBody Funcionario funcionario, @PathVariable(value="id") Long id) {
+    @PostMapping("/agendamento")
+    public ResponseEntity<Object> saveAgendamento(@RequestBody Agendamento agendamento) {
         try {
-            return ResponseEntity.ok().body(funcionarioService.update(id, funcionario));
+            return ResponseEntity.ok().body(agendamentoService.saveAgendamento(agendamento));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

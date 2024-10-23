@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AgendamentoServicelmpl implements AgendamentoService{
+public class AgendamentoServicelmpl implements AgendamentoService {
 
     @Autowired
     private AgendamentoRepository agendamentoRepository;
@@ -18,7 +18,7 @@ public class AgendamentoServicelmpl implements AgendamentoService{
     }
 
     @Override
-    public Agendamento findbyId(Long id) {
+    public Agendamento findById(Long id) {
         return agendamentoRepository.findById(id).get();
     }
 

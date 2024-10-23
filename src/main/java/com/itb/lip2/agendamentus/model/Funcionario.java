@@ -1,12 +1,22 @@
 package com.itb.lip2.agendamentus.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "Funcionario")
 public class Funcionario extends Usuario {
+
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private List<Agendamento> agendamentos = new ArrayList<Agendamento>();
 
     public Funcionario() {
     }
@@ -22,5 +32,13 @@ public class Funcionario extends Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 }
