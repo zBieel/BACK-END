@@ -5,8 +5,8 @@ BEGIN
         CREATE TABLE usuarios_papeis (
             usuario_id BIGINT NOT NULL,
             papel_id BIGINT NOT NULL,
-            CONSTRAINT fk_usuarios_papeis_usuario_id FOREIGN KEY(usuario_id) REFERENCES usuarios(id),
-            CONSTRAINT fk_usuarios_papeis_papel_id FOREIGN KEY(papel_id) REFERENCES papeis(id)
+            CONSTRAINT fk_usuarios_papeis_usuario_id FOREIGN KEY(usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+            CONSTRAINT fk_usuarios_papeis_papel_id FOREIGN KEY(papel_id) REFERENCES papeis(id) ON DELETE CASCADE
         );
     END IF;
 END $$;

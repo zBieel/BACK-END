@@ -96,13 +96,14 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	}
 
 	@Override
-	public Usuario delete(Long id) {
+	public Usuario delete(Long id) throws Exception {
 		Optional<Usuario> usuario = usuarioRepository.findById(id);
-		if(usuario.isPresent()){
+		if (usuario.isPresent()) {
 			usuarioRepository.delete(usuario.get());
 			return usuario.get();
+		} else {
+			throw new Exception("User not found");
 		}
-		return null;
 	}
 
 	@Override
