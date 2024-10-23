@@ -7,4 +7,6 @@ public interface AgendamentoService {
     List<Agendamento> findAll();
     Agendamento findById(Long id);
     Agendamento saveAgendamento(Agendamento agendamento);
+    Agendamento delete(Long id);
+    Agendamento update(Long id, Agendamento agendamento) throws Exception;
 }

@@ -29,6 +29,15 @@ public class FuncionarioController {
         }
     }
 
+    @PutMapping("/agendamento/{id}")
+    public ResponseEntity<Object> updateAgendamento(@RequestBody Agendamento agendamento, @PathVariable(value="id") Long id) {
+        try {
+            return ResponseEntity.ok().body(agendamentoService.update(id, agendamento));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/agendamentos")
     public ResponseEntity<java.util.List<Agendamento>> listarAgendamentos() {
         java.util.List<Agendamento> agendamentos = agendamentoService.findAll();
@@ -40,6 +49,15 @@ public class FuncionarioController {
         try {
             return ResponseEntity.ok().body(agendamentoService.saveAgendamento(agendamento));
         }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/agendamento/{id}")
+    public ResponseEntity<Object> deleteAgendamento(@PathVariable(value = "id") Long id) {
+        try{
+            return ResponseEntity.ok().body(agendamentoService.delete(id));
+        }catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
